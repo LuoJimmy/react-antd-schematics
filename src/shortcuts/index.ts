@@ -1,0 +1,1 @@
+export { ShortcutsTypes, ShortcutType, SHORTCUTS_CONFIRMATION_LABEL, shortcutsConfirmationChoices } from './shortcuts';

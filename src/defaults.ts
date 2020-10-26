@@ -1,0 +1,1 @@
+export const extensionName = 'React antd Schematics';
