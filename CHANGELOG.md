@@ -1,9 +1,4 @@
-# Change Log
+## 0.0.1 (2020-11-26)
 
-All notable changes to the "react antd schematics" extension will be documented in this file.
+- init
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
-
-## [Unreleased]
-
-- Initial release
