@@ -28,7 +28,8 @@
     },
 	"activationEvents": [
 		"onCommand:reactantdschematics.generateModule",
-		"onCommand:reactantdschematics.generatePage"
+		"onCommand:reactantdschematics.generatePage",
+		"onCommand:reactantdschematics.generateComponent"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -40,6 +41,10 @@
 			{
 				"command": "reactantdschematics.generatePage",
 				"title": "React antd: Generate a page"
+			},
+			{
+				"command": "reactantdschematics.generateComponent",
+				"title": "React antd: Generate a component"
 			}
 		],
 		"menus": {
@@ -51,6 +56,10 @@
 				{
 					"command": "reactantdschematics.generatePage",
 					"group": "reactantdschematics@2"
+				},
+				{
+					"command": "reactantdschematics.generateComponent",
+					"group": "reactantdschematics@3"
 				}
 			]
 		}

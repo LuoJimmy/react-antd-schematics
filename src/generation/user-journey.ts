@@ -7,13 +7,14 @@ import { Workspace } from '../workspace';
 import { CliCommand } from './cli-command';
 import { CliCommandOptions } from './cli-options';
 import { shortcutsConfirmationChoices, SHORTCUTS_CONFIRMATION_LABEL } from '../shortcuts';
-import { PageProperties } from '../schematics/config';
+import { PageProperties, ComponentProperties, PropertiesOptions } from '../schematics/config';
 
 export class UserJourney {
 
     private workspaceFolder!: vscode.WorkspaceFolder;
     private cliCommand!: CliCommand;
     private schematicName!: string;
+    private moreOptions!: PropertiesOptions[]; // 额外的参数
 
     async start (schematicName: string, contextUri?: vscode.Uri): Promise<void> {
 
@@ -38,7 +39,12 @@ export class UserJourney {
         }
         this.cliCommand.setNameAsFirstArg(nameAsFirstArg);
  
-        if(schematicName === 'page') {
+        if(schematicName === 'page' || schematicName === 'component') {
+            if(schematicName === 'page') {
+                this.moreOptions = PageProperties;
+            } else if(schematicName === 'component') {
+                this.moreOptions = ComponentProperties;
+            }
             let shortcutConfirm: boolean | undefined = false;
 
             /* Ask direct confirmation or adding more options or cancel */
@@ -144,7 +150,7 @@ export class UserJourney {
 
     private async askOptionsNames(): Promise<string[]> {
 
-        const optionsChoices: vscode.QuickPickItem[] = PageProperties;
+        const optionsChoices: vscode.QuickPickItem[] = this.moreOptions || [];
 
         if (optionsChoices.length === 0) {
             return [];
@@ -164,7 +170,7 @@ export class UserJourney {
         let filledOptions = new Map();
         for(let i = 0, len = optionsNames.length; i < len; i++) {
             const optionName = optionsNames[i];
-            const currentProper = PageProperties.find(item => item.label === optionName);
+            const currentProper = (this.moreOptions || []).find(item => item.label === optionName);
             const prompt = currentProper?.description ?? 'What value do you want for this option?';
             const properType = currentProper?.type;
             if(properType === 'boolean') {

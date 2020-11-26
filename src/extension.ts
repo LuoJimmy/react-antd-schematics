@@ -33,6 +33,14 @@ export function activate(context: vscode.ExtensionContext) {
             // Display a message box to the user
             vscode.window.showInformationMessage('generate page from React Antd Schematics!');
         }),
+        vscode.commands.registerCommand('reactantdschematics.generateComponent', (contextUri?: vscode.Uri) => {
+            // The code you place here will be executed every time your command is executed
+            
+            (new UserJourney()).start('component', contextUri);
+
+            // Display a message box to the user
+            vscode.window.showInformationMessage('generate component from React Antd Schematics!');
+        }),
     );
 }
 
